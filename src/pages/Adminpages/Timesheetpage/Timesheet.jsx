@@ -302,7 +302,7 @@ const Timesheet = () => {
             />
           </Drawer>
         ) : null}
-        {selectedItems.length > 0 ? (
+        {selected.length > 0 ? (
           <div sx={{margin: "10px 0px"}}>
             <Button
               sx={{
@@ -311,7 +311,7 @@ const Timesheet = () => {
                 margin: "10px 0px",
                 padding: "5px 10px",
               }}
-              onClick={() => approvetimesheetfunc(selectedItems)}
+              onClick={() => approvetimesheetfunc(selected)}
             >
               Approve
             </Button>
@@ -322,7 +322,7 @@ const Timesheet = () => {
                 margin: "10px 10px",
                 padding: "5px 10px",
               }}
-              onClick={() => disapprovetimesheetfunc(selectedItems)}
+              onClick={() => disapprovetimesheetfunc(selected)}
             >
               DisApprove
             </Button>
@@ -334,7 +334,7 @@ const Timesheet = () => {
                 margin: "10px 10px",
                 padding: "5px 10px",
               }}
-              onClick={() => billedtimesheetfunc(selectedItems)}
+              onClick={() => billedtimesheetfunc(selected)}
             >
               Billed
             </Button>
@@ -385,17 +385,25 @@ const Timesheet = () => {
                         onChange={() => toggleSelectRow(item.Timesheet_Id)}
                       />
                     </td>
-                    <td className="table_data">{item.Project_Name}</td>
-                    <td className="table_data">{item.Project_Code}</td>
-                    <td className="table_data">{item.Project_Hours}</td>
-                    <td className="table_data">{item.Start_Date}</td>
-                    <td className="table_data">{item.End_Date}</td>
-                    <td className="table_data">{item.Project_Type}</td>
+                    <td className="table_data">{index + 1}</td>
+
+                    <td className="table_data">{item.ts_code}</td>
+                    <td className="table_data">{item.day}</td>
+                    <td className="table_data">{item.ProjectName}</td>
+                    <td className="table_data">{item.StaffName}</td>
+                    <td className="table_data">{item.task_description}</td>
+                    <td className="table_data">{item.hours}</td>
+                    <td className="table_data">{item.billed_hours}</td>
+                    <td className="table_data">{item.blank_hours}</td>
+                    <td className="table_data">{item.ok_hours}</td>
+                    <td className="table_data">{item.approval_status}</td>
+                    <td className="table_data">{item.billing_status}</td>
+                    <td className="table_data">{item.remarks}</td>
 
                     <td className="table_data">
-                      <Link to={`/project-info/${item.ProjectId}`}>
-                        <VisibilityIcon />
-                      </Link>
+                      {/* <Link to={`/project-info/${item.ProjectId}`}> */}
+                      {/* <VisibilityIcon /> */}
+                      {/* </Link> */}
                     </td>
                   </tr>
                 </>
