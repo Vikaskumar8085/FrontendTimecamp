@@ -1,0 +1,39 @@
+@mixin text-mixin($size, $color) {
+  text-decoration: none;
+  text-transform: capitalize;
+  letter-spacing: 0.4px;
+  font-size: $size;
+  color: $color;
+}
+
+// basic text mixins
+@mixin text-basic($size, $color, $weight: normal, $line-height: 1.5) {
+  font-size: $size;
+  color: $color;
+  font-weight: $weight;
+  line-height: $line-height;
+}
+
+@mixin responsive-text($size-small, $size-medium, $size-large) {
+  font-size: $size-small;
+
+  @media (min-width: 768px) {
+    font-size: $size-medium;
+  }
+
+  @media (min-width: 1024px) {
+    font-size: $size-large;
+  }
+}
+
+@mixin text-shadow($x: 1px, $y: 1px, $blur: 2px, $color: rgba(0, 0, 0, 0.5)) {
+  text-shadow: $x $y $blur $color;
+}
+
+@mixin text-transform($transform: none) {
+  text-transform: $transform;
+}
+
+@mixin text-align($alignment: left) {
+  text-align: $alignment;
+}

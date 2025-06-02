@@ -1,0 +1,49 @@
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+  }
+  
+  .counter-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .card-header h4 {
+    margin: 0;
+    font-size: 16px;
+    color: #333;
+  }
+  
+  .change {
+    font-weight: bold;
+    font-size: 14px;
+  }
+  
+  .positive {
+    color: #4caf50;
+  }
+  
+  .negative {
+    color: #f44336;
+  }
+  
+  .value {
+    font-size: 24px;
+    font-weight: 600;
+    margin: 10px 0;
+    color: #222;
+  }
+  

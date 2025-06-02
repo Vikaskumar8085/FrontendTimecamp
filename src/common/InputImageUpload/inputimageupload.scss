@@ -1,0 +1,73 @@
+.input_image_wrapper {
+  // max-width: 700px;
+  // margin: 40px auto;
+  // padding: 20px;/
+  // background: #fff;
+  // border: 1px solid #ddd;
+  display: block;
+  position: relative;
+  border-radius: 16px;
+  // box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.input_image_box {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 30px;
+
+  flex-wrap: wrap;
+}
+
+.input_image_box_left_side .image_wrapper {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 6px solid #6560f0;
+  background: #f0f0f0;
+  display: flex;
+  justify-content: center;
+  padding: 2px;
+  align-items: center;
+}
+
+.image_wrapper img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 4px 12px 0px rgba(0, 0, 0, 0.1);
+  border: 6px solid #ffffff;
+}
+
+.input_image_box_right_side {
+  flex: 1;
+}
+
+.input_image_box_wrapper p {
+  font-size: 16px;
+  margin-bottom: 12px;
+  font-weight: 500;
+  color: #333;
+}
+
+.upload_label {
+  display: inline-block;
+  cursor: pointer;
+}
+
+.upload_box {
+  padding: 10px 16px;
+  //   border: 2px dashed #ffb814;
+  background: #eff6ff;
+  // color: #2563eb;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.upload_box:hover {
+  background: #dbeafe;
+  border-color: #1d4ed8;
+}

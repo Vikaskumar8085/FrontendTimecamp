@@ -1,0 +1,39 @@
+.Employee_Project_card_wrapper {
+  display: block;
+  margin: 20px 0px;
+  overflow: auto;
+  width: 100%;
+  border-radius: 12px;
+  height: 723px fit-content;
+  .Employee_Project_card_wrapper_box {
+    position: relative;
+    display: block;
+    height: 100%;
+    max-width: 750px;
+    width: 100%;
+    // admin card body
+    .Employee_Project_body {
+      //   margin: 25px 0px;
+      padding: 20px;
+      width: 100%;
+      background-color: var(--white-color);
+      height: 100%;
+    }
+
+    // Employee_Project card header
+    .Employee_Project_card_header {
+      background-color: var(--white-color);
+      .Employee_Project_header_tags {
+        position: relative;
+        .Employee_Project_header_tags_title {
+          padding: 20px;
+          h1 {
+            text-transform: capitalize;
+            font-weight: 300;
+            letter-spacing: 0.7px;
+          }
+        }
+      }
+    }
+  }
+}

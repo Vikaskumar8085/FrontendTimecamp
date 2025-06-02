@@ -1,0 +1,28 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+.wrapper {
+  display: block;
+  overflow: hidden;
+  position: relative;
+  @import "./Header/index";
+
+  .wrapper_box {
+    display: flex;
+    background-color: #ebebeb;
+    padding: 10px;
+    height: 90vb;
+    position: relative;
+    // sidebar
+    @import "./Sidebar/sidebar";
+
+    // sidebar
+    .wrapper_content {
+      width: 100%;
+      padding: 20px;
+      overflow: auto;
+    }
+  }
+}

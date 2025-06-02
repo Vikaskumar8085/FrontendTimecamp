@@ -1,0 +1,105 @@
+.project-card {
+  background: #f8f9ff;
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+  font-family: "Inter", sans-serif;
+  width: 100%;
+  max-width: 600px;
+
+  .header {
+    font-weight: 600;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    color: #333;
+  }
+
+  .details {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+
+    .info {
+      display: flex;
+      flex-direction: column;
+      font-size: 0.85rem;
+      label {
+        color: #999;
+        margin-bottom: 0.2rem;
+      }
+      span {
+        font-weight: 500;
+        color: #333;
+      }
+    }
+
+    .avatars {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+
+      img {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        border: 2px solid #fff;
+        box-shadow: 0 0 0 1px #ccc;
+      }
+
+      .extra {
+        font-size: 0.8rem;
+        color: #666;
+        padding-left: 4px;
+      }
+    }
+  }
+
+  .progress-section {
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    .progress-bar {
+      background: #e0e0e0;
+      height: 8px;
+      border-radius: 6px;
+      flex-grow: 1;
+      overflow: hidden;
+
+      .filled {
+        height: 100%;
+        background: #38c976;
+        border-radius: 6px;
+      }
+    }
+
+    .progress-text {
+      font-size: 0.8rem;
+      color: #444;
+      font-weight: 500;
+    }
+  }
+
+  .action {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: flex-end;
+
+    button {
+      background: #6c63ff;
+      color: #fff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+
+      &:hover {
+        background: #5a53d4;
+      }
+    }
+  }
+}

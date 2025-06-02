@@ -1,0 +1,23 @@
+.checkbox_multi_wrapper {
+  margin-bottom: 1rem;
+
+  .label {
+    font-weight: 600;
+    margin-bottom: 8px;
+    display: block;
+    color: gray;
+  }
+
+  .checkbox_group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .checkbox_option {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.95rem;
+  }
+}

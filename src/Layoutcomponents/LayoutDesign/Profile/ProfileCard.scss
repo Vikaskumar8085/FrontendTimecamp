@@ -1,0 +1,85 @@
+.profile-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 1rem;
+  position: relative;
+  display: block;
+  overflow: hidden;
+  width: 280px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  font-family: "Segoe UI", sans-serif;
+
+  .top-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .avatar {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .info {
+      flex: 1;
+      margin-left: 0.75rem;
+
+      .name {
+        font-weight: 600;
+        margin: 0;
+        font-size: 15px;
+        color: #2f2f41;
+      }
+
+      .email {
+        font-size: 12px;
+        color: #999;
+      }
+    }
+
+    .logout-btn {
+      background: #ff3d57;
+      border: none;
+      color: white;
+      border-radius: 8px;
+      padding: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+  }
+
+  .menu {
+    margin-top: 1rem;
+    list-style: none;
+    padding: 0;
+    // position: absolute;
+    position: relative;
+
+    li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 14px;
+      color: #2f2f41;
+      transition: background 0.2s;
+
+      &:hover {
+        background-color: #f2f4f7;
+      }
+
+      svg {
+        color: #2f2f41;
+      }
+    }
+
+    li:first-child {
+      background-color: #f4f6fb;
+    }
+  }
+}

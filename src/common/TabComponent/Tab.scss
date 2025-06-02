@@ -1,0 +1,49 @@
+.Tabs_container {
+  background-color: #ffffff;
+  width: 100%;
+  position: relative;
+
+  display: block;
+  box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.1);
+
+  .Tabs_box {
+    display: inline-block;
+    position: relative;
+
+    .Tabs_head {
+      position: relative;
+      display: block;
+
+      .Tabs_title {
+        padding: 10px 15px;
+        transition: all ease-in-out 0.3s;
+        font-weight: 300;
+        font-size: 1em;
+        text-decoration: none;
+        text-transform: capitalize;
+        letter-spacing: 1px;
+
+        &.active {
+          background-color: #192734;
+          color: #f1f1f1;
+        }
+
+        &:hover {
+          background-color: #192734;
+          color: #f1f1f1    ;
+        }
+      }
+    }
+  }
+}
+
+.Tabsbody_wrapper {
+  background-color: #f1f1f1;
+  overflow: auto;
+  padding: 20px;
+
+  .TabsBody {
+    display: block;
+    position: relative;
+  }
+}

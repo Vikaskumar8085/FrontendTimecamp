@@ -1,0 +1,17 @@
+.btn_wrapper {
+  margin: 10px 0px;
+  position: relative;
+  display: block;
+  overflow: hidden;
+  .btn {
+    border: none;
+    padding: 10px 20px;
+    background-color: var(--primary-color) !important;
+    color: white;
+    width: auto;
+    text-transform: capitalize;
+    font-weight: 600;
+    border-radius: 4px;
+    transition: all linear 0.3s;
+  }
+}

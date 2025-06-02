@@ -1,0 +1,43 @@
+.date-range-wrapper {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .date-range-picker {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 0.75rem;
+    background-color: #f9f9f9;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #333;
+    cursor: pointer;
+    transition: border-color 0.3s, background-color 0.3s;
+  
+    &:hover {
+      border-color: #bdbdbd;
+      background-color: #f1f1f1;
+    }
+  
+    .icon {
+      color: #6c63ff;
+      display: flex;
+      align-items: center;
+      font-size: 1.2rem;
+    }
+  
+    .date-text {
+      white-space: nowrap;
+    }
+  }
+  
+  .calendar-popup {
+    position: absolute;
+    top: 110%;
+    z-index: 999;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  }
+  

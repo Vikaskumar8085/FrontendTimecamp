@@ -1,0 +1,38 @@
+.Project_card_wrapper {
+  position: relative;
+  display: block;
+  .Project_Card_box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex: 1;
+    padding: 20px 10px;
+
+    .Project_card_label {
+      display: block;
+      h6 {
+        font-weight: 100;
+        text-transform: capitalize;
+        color: var(--text-color);
+      }
+    }
+
+    .Project_card_content {
+      display: flex;
+      align-items: center;
+      background-color: var(--light-gray-color);
+      padding: 10px;
+      border-radius: 4px;
+
+      span {
+        padding: 0px 5px;
+        color: var(--primary-color);
+      }
+      p {
+        text-transform: capitalize;
+        color: var(--black-color);
+        padding: 0px 6px;
+      }
+    }
+  }
+}

@@ -1,0 +1,101 @@
+@import "../../mixins/text_mixins";
+
+.input_wrapper {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  gap: 5px;
+  margin: 10px 0;
+  width: 100%;
+
+  label {
+    @include text-mixin(
+      1rem,
+      var(--color-one)
+    ); // Custom mixin for font-size and color
+  }
+
+  .input_box {
+    width: 100%;
+    display: block;
+    overflow: hidden;
+    position: relative;
+
+    span {
+      position: absolute;
+      right: 10px; // Adjusted to fit within the input box better
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      transition: color 0.2s ease-in-out;
+
+      &:hover {
+        color: var(--color-primary); // Add a hover effect
+      }
+
+      &:focus-visible {
+        outline: 2px dashed var(--color-primary); // Accessibility focus
+        outline-offset: 2px;
+      }
+    }
+
+    input {
+      padding: 10px;
+      width: 100%;
+      min-width: 320px;
+      max-width: 1000px;
+      border: 1px solid rgba(0, 0, 0, 0.3);
+      border-radius: 4px;
+      overflow: hidden;
+      outline: none;
+      transition: border-color 0.2s ease-in-out;
+
+      &:focus {
+        border-color: var(--color-primary);
+      }
+    }
+  }
+}
+
+// Media Queries for responsiveness
+@media (max-width: 768px) {
+  .input_wrapper {
+    margin: 8px 0; // Adjust margin for smaller screens
+
+    label {
+      @include text-mixin(0.9rem, var(--color-one)); // Smaller font size
+    }
+
+    .input_box {
+      span {
+        right: 8px; // Adjust position for smaller screens
+        font-size: 18px; // Adjust icon size
+      }
+
+      input {
+        padding: 8px; // Reduced padding for smaller screens
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .input_wrapper {
+    margin: 6px 0; // Further adjust margin
+
+    label {
+      @include text-mixin(0.8rem, var(--color-one)); // Even smaller font size
+    }
+
+    .input_box {
+      span {
+        right: 6px; // Further adjust position
+        font-size: 16px; // Further adjust icon size
+      }
+
+      input {
+        padding: 6px; // Further reduced padding
+      }
+    }
+  }
+}

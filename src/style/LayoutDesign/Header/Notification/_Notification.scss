@@ -1,0 +1,88 @@
+// Notification Design
+.notification-dropdown {
+  position: absolute;
+  top: 4rem;
+  right: 1.5rem;
+  width: 360px;
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  font-family: "Inter", sans-serif;
+  overflow: hidden;
+  animation: fadeIn 0.2s ease-in-out;
+
+  .dropdown-header {
+    padding: 1rem 1.25rem;
+    background-color: #f9fafb;
+    border-bottom: 1px solid #e5e7eb;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #1f2937;
+  }
+
+  .dropdown-content {
+    max-height: 300px;
+    overflow-y: auto;
+    padding: 0.75rem 1.25rem;
+
+    .notification-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem;
+      border-radius: 8px;
+      transition: background-color 0.2s;
+      cursor: pointer;
+      margin-bottom: 0.5rem;
+
+      &:hover {
+        background-color: #f3f4f6;
+      }
+
+      .avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 9999px;
+        object-fit: cover;
+      }
+
+      .info {
+        display: flex;
+        flex-direction: column;
+
+        .title {
+          font-weight: 500;
+          color: #111827;
+          font-size: 0.95rem;
+        }
+
+        .timestamp {
+          font-size: 0.75rem;
+          color: #9ca3af;
+          margin-top: 0.15rem;
+        }
+      }
+    }
+
+    .empty-message {
+      font-size: 0.875rem;
+      color: #6b7280;
+      text-align: center;
+      padding: 1rem 0;
+    }
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+// Notification Design

@@ -1,0 +1,52 @@
+// TableWithFilter.scss
+
+.filters {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+
+  label {
+    font-weight: 600;
+    font-size: 14px;
+
+    select {
+      margin-left: 0.5rem;
+      padding: 4px 8px;
+      font-size: 14px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+  }
+}
+
+.select-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: Arial, sans-serif;
+
+  th,
+  td {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    text-align: left;
+  }
+
+  thead {
+    background-color: #f4f4f4;
+  }
+
+  tbody tr:hover {
+    background-color: #f9f9f9;
+  }
+
+  tbody tr.selected {
+    background-color: #d0ebff;
+  }
+
+  input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+  }
+}

@@ -1,0 +1,112 @@
+$primary-bg: #2c3e50;
+$secondary-bg: #34495e;
+$hover-bg: #1abc9c;
+$text-color: white;
+
+.layout_sidebar {
+  width: 280px;
+  background: $primary-bg;
+  color: $text-color;
+  height: 100vh;
+  display: block;
+  position: fixed;
+  overflow: auto;
+  z-index: 1;
+  transition: width 0.3s ease-in-out;
+
+  &.closed {
+    width: 70px;
+
+    .menu_item span,.icon {
+      display: none;
+    }
+
+  }
+
+  .sidebar_toggle {
+    background: none;
+    border: none;
+    color: $text-color;
+    font-size: 24px;
+    padding: 10px;
+    cursor: pointer;
+    display: block;
+    width: 90%;
+    text-align: left;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+
+    li {
+      position: relative;
+
+     
+
+      .menu_item {
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        color: $text-color;
+        padding: 12px;
+        background: $secondary-bg;
+        border-radius: 5px;
+        margin: 5px;
+        transition: background 0.1s ease-in-out;
+
+        svg {
+          margin-right: 10px;
+          font-size: 18px;
+        }
+
+        &:hover {
+          background: $hover-bg;
+        }
+      }
+
+      .dropdown_toggle {
+        display: flex;
+        justify-content: space-between;
+        width: 96%;
+        background: $secondary-bg;
+        border: none;
+        color: $text-color;
+        padding: 12px;
+        cursor: pointer;
+        align-items: center;
+        font-size: 16px;
+
+        .icon {
+          transition: transform 0.3s ease-in-out;
+        }
+
+        .rotate {
+          transform: rotate(180deg);
+        }
+
+        &:hover {
+          background: $hover-bg;
+        }
+      }
+
+      .dropdown_menu {
+        list-style: none;
+        padding: 0;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-in-out;
+        background: darken($secondary-bg, 5%);
+        border-radius: 5px;
+
+        &.open {
+          max-height: 150px;
+        }
+
+        .menu_item {
+          padding-left: 30px;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,35 @@
+.input_select_wrapper {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+
+  label {
+    margin-bottom: 6px;
+    font-weight: 500;
+    color: gray;
+  }
+
+  .input_select {
+    padding: 10px 12px;
+    font-size: 16px;
+    border: 1px solid #cfcfcf;
+    border-radius: 6px;
+    outline: none;
+    background-color: #fff;
+    transition: border-color 0.3s;
+
+    &:focus {
+      border-color: #797979;
+    }
+
+    &.input_error {
+      border-color: #e53935;
+    }
+  }
+
+  .input_error_text {
+    margin-top: 4px;
+    color: #e53935;
+    font-size: 13px;
+  }
+}

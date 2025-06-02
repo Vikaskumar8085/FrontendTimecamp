@@ -1,0 +1,80 @@
+.input_file_upload_wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 40px 10px;
+  background-color: #f4f6f8;
+
+  box-sizing: border-box;
+  .input_file_upload_box_wrapper {
+    padding: 3px;
+    border: 1px solid var(--primary-color);
+    border-radius: 16px;
+    display: block;
+    overflow: hidden;
+
+    .input_file_upload_box {
+      background: #ffffff;
+      border: 1px dashed var(--primary-color); /* or change to dotted if needed */
+      border-radius: 16px;
+      // outline:var(zz);
+      padding: 30px;
+      min-width: 300px;
+      width: 100%;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+      text-align: center;
+      transition: box-shadow 0.3s ease;
+
+      &:hover {
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      }
+
+      .input_file_upload_text_wrapper {
+        margin-bottom: 20px;
+
+        h1 {
+          font-size: 1.5rem;
+          color: #333;
+          margin-bottom: 8px;
+        }
+
+        p {
+          font-size: 0.95rem;
+          color: #666;
+          line-height: 1.4;
+        }
+
+        .upload-icon {
+          width: 60px;
+          height: 60px;
+          margin: 0 auto 15px auto;
+          background: url("https://cdn-icons-png.flaticon.com/512/1828/1828911.png")
+            no-repeat center;
+          background-size: contain;
+          opacity: 0.8;
+        }
+      }
+
+      .input_file_upload_input_wrapper {
+        margin-top: 10px;
+
+        .input_file_upload_input_box {
+          display: block;
+          margin: 0 auto;
+          padding: 10px;
+          font-size: 0.95rem;
+          border: 1px solid #ccc;
+          border-radius: 10px;
+          cursor: pointer;
+          background-color: #e6e6e6;
+          width: fit-content;
+          transition: border-color 0.3s ease;
+          &:hover {
+            border-color: #e485ff;
+          }
+        }
+      }
+    }
+  }
+}

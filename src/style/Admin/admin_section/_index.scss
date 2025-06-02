@@ -1,0 +1,118 @@
+.admin_card_wrapper {
+  display: block;
+  margin: 20px 0px;
+  overflow: auto;
+  width: 100%;
+  border-radius: 12px;
+  height: 723px fit-content;
+  .admin_card_wrapper_box {
+    position: relative;
+    display: block;
+    height: 100%;
+    width: 100%;
+    // admin card body
+    .admin_body {
+      padding-top: 80px;
+      padding-left: 20px;
+      padding-right: 20px;
+      padding-bottom: 20px;
+      width: 100%;
+      background-color: var(--white-color);
+      height: 100%;
+      .admin-card {
+        padding: 1rem;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+        background-color: #fff;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+
+        &__name {
+          font-size: 1.25rem;
+          font-weight: 600;
+        }
+
+        &__email {
+          color: #666;
+        }
+
+        &__status {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+        }
+
+        &__icon {
+          &--verified {
+            color: green;
+          }
+
+          &--error {
+            color: red;
+          }
+
+          &--unblock {
+            color: green;
+          }
+
+          &--block {
+            color: red;
+          }
+        }
+
+        &__text {
+          &.verified {
+            color: green;
+          }
+
+          &.not-verified {
+            color: red;
+          }
+        }
+
+        &__terms {
+          &.accepted {
+            color: green;
+          }
+
+          &.not-accepted {
+            color: red;
+          }
+        }
+
+        &__block-status {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+        }
+      }
+    }
+
+    // admin card header
+    .admin_card_header {
+      img {
+        width: 100%;
+        height: 140px;
+        object-fit: cover;
+      }
+      .admin_header_tags {
+        position: absolute;
+        top: 75px;
+        width: 100%;
+        left: 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+        padding: 20px 40px;
+        img {
+          width: 100px;
+          height: 100px;
+          border: 4px solid white;
+          box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+          border-radius: 50%;
+        }
+      }
+    }
+  }
+}

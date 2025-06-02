@@ -1,0 +1,30 @@
+.cardOne_container {
+  width: 100%;
+  position: relative;
+  display: block;
+  border-radius: 8px;
+  overflow: hidden;
+  padding: 10px 0px;
+  .cardone_row {
+    display: flex;
+    justify-content: start;
+    align-content: flex-end;
+
+    .cardoneright {
+      margin: 0px 10px;
+      .right-heading-text {
+        h1 {
+          margin-bottom: 10px;
+          font-weight: 100;
+          color: var(--gray-color);
+        }
+        .right-paragraph {
+          color: var(--black-color);
+        }
+      }
+    }
+    .cardoneleft {
+      margin: 0px 10px;
+    }
+  }
+}

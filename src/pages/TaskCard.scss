@@ -1,0 +1,84 @@
+.task-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  width: 400px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
+  display: flex;
+  height: fit-content;
+  flex-direction: column;
+  gap: 0.9rem;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__progress {
+    font-weight: 600;
+    font-size: 1rem;
+  }
+
+  &__status {
+    padding: 0.25rem 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border-radius: 12px;
+    border: 1px solid transparent;
+
+    &--on-progress {
+      background-color: #fff5cc;
+      color: #f59e0b;
+      border-color: #fcd34d;
+    }
+
+    &--done {
+      background-color: #e7f9ed;
+      color: #10b981;
+      border-color: #34d399;
+    }
+
+    // Add more statuses as needed
+  }
+
+  &__date {
+    color: #9ca3af;
+    font-size: 0.85rem;
+  }
+
+  &__task-name {
+    font-weight: 600;
+    color: #111827;
+  }
+
+  &__user {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+
+    &-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    &-name {
+      font-weight: 600;
+      color: #1f2937;
+    }
+
+    &-role {
+      font-size: 0.8rem;
+      color: #9ca3af;
+    }
+  }
+
+  &__avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+}
