@@ -3,7 +3,6 @@ import {
   fetchContractorprojectsapicall,
   fetchcontractortimesheetapicall,
 } from "../../ApiServices/ContractorApiServices/ContractorApiServices";
-
 import moment from "moment";
 import BreadCrumb from "../../common/BreadCrumb/BreadCrumb";
 import {useFormik} from "formik";
@@ -16,30 +15,32 @@ import {
   TableBody,
   Paper,
   Grid,
+  Grid2,
   Typography,
   Card,
   Button,
-  Drawer,
   Container,
-  FormControl,
   TextField,
-  Select,
-  MenuItem,
-  InputLabel,
   TablePagination,
   FormControlLabel,
   Checkbox,
 } from "@mui/material";
+import Input from "../../common/Input/Input";
+import InputSelect from "../../common/InputSelect/InputSelect";
+import InputFileupload from "../../common/InputFileupload/InputFileupload";
+import TextArea from "../../common/TextArea/TextArea";
+import TModal from "../../common/Modal/TModal";
 import Empty from "../../common/EmptyFolder/Empty";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import AddIcon from "@mui/icons-material/Add";
-import * as Yup from "yup";
+import DeleteIcon from "@mui/icons-material/DeleteOutlineOutlined";
+// import * as Yup from "yup";
 import ListIcon from "@mui/icons-material/List";
 import apiInstance from "../../ApiInstance/apiInstance";
-import toast from "react-hot-toast";
 import LayoutDesign from "../../Layoutcomponents/LayoutDesign/LayoutDesign";
 import {useDispatch} from "react-redux";
-import { setLoader } from "../../redux/LoaderSlices/LoaderSlices";
+import {setLoader} from "../../redux/LoaderSlices/LoaderSlices";
+import toast from "react-hot-toast";
 
 const ContractorTimesheet = () => {
   const [isContractorTimesheetdata, setIsContractorTimesheetdata] = useState(
@@ -57,10 +58,6 @@ const ContractorTimesheet = () => {
 
   const [selectedItems, setSelectedItems] = useState([]);
   const [isProjectid, setProjectid] = useState(null);
-  //fill timesheet
-  //
-
-  // fill timesheet
 
   const stats = [
     {
@@ -103,55 +100,6 @@ const ContractorTimesheet = () => {
     }
   };
 
-  const formik = useFormik({
-    initialValues: {
-      hours: "",
-      project: "",
-      day: "",
-      Description: "",
-      task_description: "",
-      attachement: null,
-    },
-    validationSchema: Yup.object({
-      hours: Yup.string().required("Hours are required"),
-      project: Yup.string().required("Project ID is required"),
-      day: Yup.string().required("Day is required"),
-      Description: Yup.string().required("Description is required"),
-      task_description: Yup.string().required("Task description is required"),
-      attachement: Yup.mixed().required("Attachment is required"),
-    }),
-    onSubmit: async (values) => {
-      const formdata = new FormData();
-
-      formdata.append("hours", values.hours);
-      formdata.append("project", values.project);
-      formdata.append("day", values.day);
-      formdata.append("Description", values.Description);
-      formdata.append("task_description", values.task_description);
-      formdata.append("file", values.attachement);
-      console.log("Form Data:", formdata);
-
-      try {
-        const response = await apiInstance.post(
-          "/v2/contractor/contractor-v1-fill-timesheet",
-          formdata
-        );
-        if (response?.data?.success) {
-          fetchcontractorTimesheetfunc();
-          setIsOpenfirst(false);
-          toast.success(response?.data?.message);
-          formik.resetForm();
-        } else {
-          toast.error(response?.data?.message);
-          fetchcontractorTimesheetfunc();
-        }
-        // formik.resetForm();
-      } catch (error) {
-        toast.error(error?.response?.data?.message);
-      }
-    },
-  });
-
   const handleCheckboxChange = (timesheetId) => {
     setSelectedItems((prevSelected) => {
       if (prevSelected.includes(timesheetId)) {
@@ -161,6 +109,7 @@ const ContractorTimesheet = () => {
     });
   };
 
+  // fill-contractor-timesheet
   const handleSelectAllChange = (event) => {
     if (event.target.checked) {
       const allIds = isContractorTimesheetdata.map((item) => item.Timesheet_Id);
@@ -253,6 +202,95 @@ const ContractorTimesheet = () => {
     }
   };
 
+  const [entries, setEntries] = useState([
+    {
+      project: "",
+      hours: "",
+      day: "",
+      Description: "",
+      task_description: "",
+      attachement: null,
+    },
+  ]);
+
+  const formik = useFormik({
+    initialValues: {
+      entries,
+    },
+    onSubmit: async (values) => {
+      console.log("Submitted values:", values);
+
+      const formData = new FormData();
+
+      values.entries.forEach((entry, index) => {
+        formData.append(`entries[${index}][project]`, entry.project);
+        formData.append(`entries[${index}][hours]`, entry.hours);
+        formData.append(`entries[${index}][day]`, entry.day);
+        formData.append(`entries[${index}][Description]`, entry.Description);
+        formData.append(
+          `entries[${index}][task_description]`,
+          entry.task_description
+        );
+        if (entry.attachement) {
+          formData.append(`entries[${index}][attachement]`, entry.attachement);
+        }
+      });
+
+      try {
+        const response = await apiInstance.post(
+          "/v2/contractor/fill-contractor-timesheet",
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
+
+        if (response?.data?.success) {
+          formik.resetForm();
+          setIsOpenfirst(false);
+          toast.success(response?.data?.message);
+        } else {
+          formik.resetForm();
+          toast.error(response?.data?.message);
+          setIsOpenfirst(false);
+        }
+      } catch (error) {
+        toast.error(error?.response?.data?.message);
+        setIsOpenfirst(false);
+        formik.resetForm();
+      }
+    },
+  });
+
+  const handleFileChange = (e, index) => {
+    const file = e.currentTarget.files[0];
+    formik.setFieldValue(`entries[${index}].attachement`, file);
+  };
+
+  // add Entry
+  const addEntry = () => {
+    const newEntry = {
+      project: "",
+      hours: "",
+      day: "",
+      Description: "",
+      task_description: "",
+      attachement: null,
+    };
+    setEntries([...entries, newEntry]);
+    formik.setFieldValue("entries", [...formik.values.entries, newEntry]);
+  };
+  // Remove Entry
+  const removeEntry = (indexToRemove) => {
+    const updatedEntries = formik.values.entries.filter(
+      (_, i) => i !== indexToRemove
+    );
+    setEntries(updatedEntries);
+    formik.setFieldValue("entries", updatedEntries);
+  };
+
   return (
     <div>
       <LayoutDesign>
@@ -301,151 +339,149 @@ const ContractorTimesheet = () => {
             <Button onClick={() => billedTimesheetfunc()}>Billed</Button>
           </>
         ) : null}
+
         <Button
-          variant="contained"
-          color="primary"
-          startIcon={<AddIcon />}
-          onClick={() => setIsOpenfirst(true)}
           sx={{
-            textTransform: "none",
-            background: "#2c3e50",
-            fontWeight: "bold",
-            padding: "8px 10px",
-            marginBottom: "10px",
-            fontSize: "16px",
+            background: "#3d4e59",
+            color: "white",
+            margin: "5px 0px",
+            padding: "10px ",
           }}
+          onClick={() => setIsOpenfirst(true)}
         >
-          Fill Timesheet
+          Fill TimeSheet
         </Button>
 
         {IsOpenfirst && (
-          <Drawer
-            open={IsOpenfirst}
-            anchor="right"
-            onClose={() => {
-              setIsOpenfirst(false);
-            }}
-          >
-            <Container maxWidth="sm" sx={{p: 2}}>
-              <Typography
-                sx={{
-                  margin: "10px",
-                  textTransform: "capitalize",
-                  fontSize: "1.4rem",
-                  fontWeight: "bold",
-                }}
-              >
-                Fill Timesheet
-              </Typography>
-              <form onSubmit={formik.handleSubmit}>
-                <FormControl fullWidth sx={{mb: 2}}>
-                  <InputLabel>Select Project</InputLabel>
-                  <Select
-                    {...formik.getFieldProps("project")}
-                    value={formik.values.project}
-                    onChange={formik.handleChange}
-                  >
-                    {[
-                      ...(IsContractorProjectdata?.response || []),
-                      ...(IsContractorProjectdata?.contractorProjects || []),
-                    ].map((item) => (
-                      <MenuItem key={item.ProjectId} value={item.ProjectId}>
-                        {item.Project_Name}
-                      </MenuItem>
+          <>
+            <TModal
+              open={IsOpenfirst}
+              onClose={() => setIsOpenfirst(false)}
+              title={"fill Timesheet"}
+            >
+              <Container maxWidth="sm" sx={{p: 2}}>
+                <form onSubmit={formik.handleSubmit}>
+                  <Grid2 container spacing={2}>
+                    {formik.values.entries.map((entry, index) => (
+                      <Grid2
+                        container
+                        spacing={2}
+                        key={index}
+                        sx={{
+                          borderBottom: "1px solid #ccc",
+                          paddingBottom: 2,
+                          marginBottom: 2,
+                        }}
+                      >
+                        <Grid2 size={{md: 12, lg: 12, xs: 12, sm: 12}}>
+                          <InputSelect
+                            labelText="Select Project"
+                            placeholder="Please select your projects"
+                            options={IsContractorProjectdata?.map((item) => ({
+                              label: item.Project_Name,
+                              value: item.ProjectId,
+                            }))}
+                            {...formik.getFieldProps(
+                              `entries[${index}].project`
+                            )}
+                          />
+                        </Grid2>
+
+                        <Grid2 size={{md: 12, lg: 12, xs: 12, sm: 12}}>
+                          <Input
+                            type="number"
+                            placeholder="Please Enter Project Hours"
+                            labelText="Project Hours"
+                            {...formik.getFieldProps(`entries[${index}].hours`)}
+                          />
+                        </Grid2>
+
+                        <Grid2 size={{md: 12, lg: 12, xs: 12, sm: 12}}>
+                          <Input
+                            type="date"
+                            labelText="Date"
+                            {...formik.getFieldProps(`entries[${index}].day`)}
+                          />
+                        </Grid2>
+
+                        <Grid2 size={{md: 12, lg: 12, xs: 12, sm: 12}}>
+                          <TextArea
+                            labelText="Description"
+                            placeholder="Please Enter Project Description"
+                            {...formik.getFieldProps(
+                              `entries[${index}].Description`
+                            )}
+                          />
+                        </Grid2>
+
+                        <Grid2 size={{md: 12, lg: 12, xs: 12, sm: 12}}>
+                          <TextArea
+                            labelText="Task Description"
+                            placeholder="Please Enter Task Description"
+                            {...formik.getFieldProps(
+                              `entries[${index}].task_description`
+                            )}
+                          />
+                        </Grid2>
+
+                        <Grid2 size={{md: 12, lg: 12, xs: 12, sm: 12}}>
+                          <InputFileupload
+                            type="file"
+                            onChange={(e) => handleFileChange(e, index)}
+                          />
+                        </Grid2>
+
+                        {formik.values.entries.length > 1 && (
+                          <Grid2 size={{md: 12, lg: 12, xs: 12, sm: 12}}>
+                            <Button
+                              type="button"
+                              startIcon={<DeleteIcon />}
+                              variant="outlined"
+                              color="secondary"
+                              onClick={() => removeEntry(index)}
+                            >
+                              Remove Entry
+                            </Button>
+                          </Grid2>
+                        )}
+                      </Grid2>
                     ))}
-                  </Select>
-                </FormControl>
 
-                <TextField
-                  fullWidth
-                  label="Hours"
-                  name="hours"
-                  value={formik.values.hours}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  error={formik.touched.hours && Boolean(formik.errors.hours)}
-                  helperText={formik.touched.hours && formik.errors.hours}
-                  margin="normal"
-                />
+                    <Grid2 size={{md: 12, lg: 12, xs: 12, sm: 12}}>
+                      <Button
+                        startIcon={<AddIcon />}
+                        color="success"
+                        variant="outlined"
+                        type="button"
+                        onClick={addEntry}
+                      >
+                        Add Entry
+                      </Button>
+                    </Grid2>
 
-                <TextField
-                  fullWidth
-                  label="Day"
-                  name="day"
-                  type="date"
-                  InputLabelProps={{shrink: true}}
-                  value={formik.values.day}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  error={formik.touched.day && Boolean(formik.errors.day)}
-                  helperText={formik.touched.day && formik.errors.day}
-                  margin="normal"
-                />
-
-                <TextField
-                  fullWidth
-                  label="Description"
-                  name="Description"
-                  value={formik.values.Description}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  error={
-                    formik.touched.Description &&
-                    Boolean(formik.errors.Description)
-                  }
-                  helperText={
-                    formik.touched.Description && formik.errors.Description
-                  }
-                  margin="normal"
-                />
-
-                <TextField
-                  fullWidth
-                  label="Task Description"
-                  name="task_description"
-                  value={formik.values.task_description}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  error={
-                    formik.touched.task_description &&
-                    Boolean(formik.errors.task_description)
-                  }
-                  helperText={
-                    formik.touched.task_description &&
-                    formik.errors.task_description
-                  }
-                  margin="normal"
-                />
-
-                <input
-                  type="file"
-                  name="attachement"
-                  onChange={(event) =>
-                    formik.setFieldValue(
-                      "attachement",
-                      event.currentTarget.files[0]
-                    )
-                  }
-                  onBlur={formik.handleBlur}
-                />
-                {formik.touched.attachement && formik.errors.attachement && (
-                  <div style={{color: "red"}}>{formik.errors.attachement}</div>
-                )}
-
-                <Button
-                  type="submit"
-                  variant="contained"
-                  color="primary"
-                  style={{marginTop: "15px"}}
-                  fullWidth
-                >
-                  Submit
-                </Button>
-              </form>
-            </Container>
-          </Drawer>
+                    <Grid2 size={{md: 12, lg: 12, xs: 12, sm: 12}}>
+                      <Button
+                        sx={{
+                          width: "100%",
+                          background: "#3d4e59",
+                          color:"white",
+                          padding: "10px 0px",
+                        }}
+                        color="success"
+                        variant="outlined"
+                        type="submit"
+                      >
+                        Submit
+                      </Button>
+                    </Grid2>
+                  </Grid2>
+                </form>
+              </Container>
+            </TModal>
+          </>
         )}
 
+        {/* fill time sheet */}
         {/* header tab of timesheet */}
 
         {/* timesheet */}

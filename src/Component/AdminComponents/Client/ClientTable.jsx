@@ -119,6 +119,12 @@ const ClientTable = ({
                           >
                             <VisibilityIcon />
                           </Link>
+                          <Button
+                            onClick={() => handleOpen(item)}
+                            color="primary"
+                          >
+                            <EditIcon />
+                          </Button>
                         </td>
                       </tr>
                     </>

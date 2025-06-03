@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
 import Grid from "@mui/material/Grid";
-import {Card, CardContent, Typography, Box} from "@mui/material";
+import {Card, CardContent, Typography, Box, Grid2} from "@mui/material";
 import {useDispatch, useSelector} from "react-redux";
 import {setLoader} from "../../../redux/LoaderSlices/LoaderSlices";
 import {admindashcounterapicall} from "../../../ApiServices/DashboardApiServices/admindashboard";
@@ -9,42 +9,11 @@ import {setadminNumberofdashboarddata} from "../../../redux/DashboardSlices/dash
 import PeopleIcon from "@mui/icons-material/People";
 import WorkIcon from "@mui/icons-material/Work";
 import BusinessIcon from "@mui/icons-material/Business";
+import StatCard from "../../../common/StatCard/StatCard";
 
 const DashCounter = () => {
   const dispatch = useDispatch();
   const dashdata = useSelector((state) => state.dash.countervalues);
-
-  const getValue = (value) => value || 0;
-
-  const dataList = [
-    {
-      label: "Total Hours",
-      value: getValue(dashdata?.totalHours),
-      icon: <PeopleIcon fontSize="large" color="primary" />,
-    },
-    {
-      label: "Staff Number",
-      value: getValue(dashdata?.staffNo),
-      icon: <PeopleIcon fontSize="large" color="primary" />,
-    },
-    {
-      label: "Project Number",
-      value: getValue(dashdata?.projectNo),
-      icon: <WorkIcon fontSize="large" color="secondary" />,
-    },
-    {
-      label: "Client Number",
-      value: getValue(dashdata?.clientNo),
-      icon: <BusinessIcon fontSize="large" color="success" />,
-    },
-  ];
-
-  const pieData = dataList.map((item, index) => ({
-    name: item.label,
-    value: item.value,
-  }));
-  const COLORS = ["#0088FE", "#00C49F", "#FFBB28"];
-
   const fetchNumberofdashdatafunc = async () => {
     try {
       dispatch(setLoader(true));
@@ -64,7 +33,7 @@ const DashCounter = () => {
 
   return (
     <div>
-      <Grid container spacing={2}>
+      {/* <Grid container spacing={2}>
         {dataList.map((item, index) => (
           <Grid item xs={12} sm={12} md={3} key={index}>
             <Card
@@ -87,8 +56,8 @@ const DashCounter = () => {
                   >
                     {item.label}
                   </Typography>
-                  <Typography variant="h6">{item.value}</Typography>
-                  {/* <ResponsiveContainer width="100%" height={150}>
+                  <Typography variant="h6">{item.value}</Typography> */}
+      {/* <ResponsiveContainer width="100%" height={150}>
                     <PieChart>
                       <Pie
                         data={[{name: item.label, value: item.value}]}
@@ -103,12 +72,30 @@ const DashCounter = () => {
                       <Tooltip />
                     </PieChart>
                   </ResponsiveContainer> */}
-                </Box>
+      {/* </Box>
               </CardContent>
             </Card>
           </Grid>
         ))}
-      </Grid>
+      </Grid> */}
+
+      <Grid2 container spacing={2}>
+        {dashdata.map((stat, index) => (
+          <>
+            <Grid2 size={{md: 3, lg: 3, sm: 6, xs: 12}}>
+              <StatCard
+                key={index}
+                title={stat.title}
+                value={stat.value}
+                unit={stat.unit}
+                percentage={stat.percentage}
+                trendDown={stat.trendDown}
+                chartData={stat.chartData}
+              />
+            </Grid2>
+          </>
+        ))}
+      </Grid2>
     </div>
   );
 };

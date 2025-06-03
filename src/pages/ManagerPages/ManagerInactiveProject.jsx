@@ -50,9 +50,9 @@ const ManagerInactiveProject = () => {
     setPage(0);
   };
 
-  const displayedProjects = data
-    .flatMap((item) => [...item.fetchproject, ...item.fetchteamproject])
-    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
+  // const displayedProjects = data
+  //   .flatMap((item) => [...item.fetchproject, ...item.fetchteamproject])
+  //   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
 
   useEffect(() => {
     fetchprojects();
@@ -92,6 +92,10 @@ const ManagerInactiveProject = () => {
             <Table>
               <TableHead>
                 <TableRow>
+                  {" "}
+                  <TableCell>
+                    <b>Id</b>
+                  </TableCell>
                   <TableCell>
                     <b>Project Name</b>
                   </TableCell>
@@ -117,49 +121,27 @@ const ManagerInactiveProject = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {data.map((item, index) => (
+                {data.map((project, index) => (
                   <>
-                    {item.fetchproject.map((project) => (
-                      <TableRow key={project._id}>
-                        <TableCell>{project.Project_Name}</TableCell>
-                        <TableCell>{project.Project_Code}</TableCell>
-                        <TableCell>{project.Start_Date}</TableCell>
-                        <TableCell>{project.End_Date}</TableCell>
-                        <TableCell>{project.Project_Type}</TableCell>
-                        <TableCell>{project.Project_Hours}</TableCell>
-                        <TableCell>
-                          {project.Project_Status ? "Active" : "Inactive"}
-                        </TableCell>
-                        <TableCell>
-                          <Link
-                            to={`/manager/project-info/${project?.ProjectId}`}
-                          >
-                            view
-                          </Link>
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                    {item.fetchteamproject.map((teamProject) => (
-                      <TableRow key={teamProject._id}>
-                        <TableCell>{teamProject.Project_Name}</TableCell>
-                        <TableCell>{teamProject.Project_Code}</TableCell>
-                        <TableCell>{teamProject.Start_Date}</TableCell>
-                        <TableCell>{teamProject.End_Date}</TableCell>
-                        <TableCell>{teamProject.Project_Type}</TableCell>
-                        <TableCell>{teamProject.Project_Hours}</TableCell>
-                        <TableCell>
-                          {teamProject.Project_Status ? "Active" : "Inactive"}
-                        </TableCell>
-                        <TableCell>
-                          <Link
-                            to={`/manager/project-info/${teamProject?.ProjectId}`}
-                          >
-                            {" "}
-                            view
-                          </Link>
-                        </TableCell>
-                      </TableRow>
-                    ))}
+                    <TableRow key={index}>
+                      <TableCell>{index + 1}</TableCell>
+                      <TableCell>{project.Project_Name}</TableCell>
+                      <TableCell>{project.Project_Code}</TableCell>
+                      <TableCell>{project.Start_Date}</TableCell>
+                      <TableCell>{project.End_Date}</TableCell>
+                      <TableCell>{project.Project_Type}</TableCell>
+                      <TableCell>{project.Project_Hours}</TableCell>
+                      <TableCell>
+                        {project.Project_Status ? "Active" : "Inactive"}
+                      </TableCell>
+                      <TableCell>
+                        <Link
+                          to={`/manager/project-info/${project?.ProjectId}`}
+                        >
+                          view
+                        </Link>
+                      </TableCell>
+                    </TableRow>
                   </>
                 ))}
               </TableBody>

@@ -1,6 +1,5 @@
 import {Grid2, Typography} from "@mui/material";
 import React from "react";
-import Layout from "../../Layoutcomponents/Layout/Layout";
 import BreadCrumb from "../../common/BreadCrumb/BreadCrumb";
 import ManagerTotalHoursbyResources from "../../Component/ManagerComponents/TimesummaryComponent/ManagerTotalHoursbyResources";
 import ManagerHourByProject from "../../Component/ManagerComponents/TimesummaryComponent/ManagerHourByProject";

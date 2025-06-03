@@ -156,7 +156,7 @@ const Client = () => {
 
   return (
     <LayoutDesign>
-      <BreadCrumb pageName="Client" />
+      <BreadCrumb pageName="all client data Client" />
       <Button
         onClick={() => setIsOpen(true)}
         startIcon={<AddIcon />}
