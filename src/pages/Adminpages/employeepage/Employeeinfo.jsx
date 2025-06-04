@@ -6,7 +6,7 @@ import {
   fetchemployeeprojecttimesheetapicall,
   fetchsingleemployeeapicall,
 } from "../../../ApiServices/AdminApiServices/Employee";
-import {Paper} from "@mui/material";
+import {Grid2, Paper} from "@mui/material";
 import Card from "../../../common/Card/Card";
 import Layout from "../../../Layoutcomponents/Layout/Layout";
 import BreadCrumb from "../../../common/BreadCrumb/BreadCrumb";
@@ -21,6 +21,8 @@ import {useDispatch} from "react-redux";
 import {setLoader} from "../../../redux/LoaderSlices/LoaderSlices";
 import toast from "react-hot-toast";
 import LayoutDesign from "../../../Layoutcomponents/LayoutDesign/LayoutDesign";
+import apiInstance from "../../../ApiInstance/apiInstance";
+import StatCard from "../../../common/StatCard/StatCard";
 
 const Employeeinfo = () => {
   const {id} = useParams();
@@ -139,7 +141,19 @@ const Employeeinfo = () => {
       toast.error(error?.response?.data?.message);
     }
   };
+  const [cards, setCards] = useState([]);
+  const fetchemployeetimesheetstatcardfunc = async () => {
+    try {
+      const response = await apiInstance.get(
+        `/v1/admin/employee-stat-card/${id}`
+      );
+      setCards(response.data.data);
+    } catch (error) {
+      console.log(error?.message);
+    }
+  };
   useEffect(() => {
+    fetchemployeetimesheetstatcardfunc();
     fetchsingleemployeefunc();
     fetchemployeeprojectsfunc();
     fetchemployeeTimesheetfunc();
@@ -160,6 +174,21 @@ const Employeeinfo = () => {
     {
       content: (
         <>
+          <Grid2 container spacing={3} sx={{my: 1}}>
+            {cards.map((card, index) => (
+              <Grid2 key={index} size={{xs: 12, md: 3, lg: 3}}>
+                <StatCard
+                  index={index}
+                  title={card.title}
+                  value={card.value}
+                  unit={card.unit}
+                  percentage={card.percentage}
+                  trendDown={card.trendDown}
+                  chartData={card.chartData}
+                />
+              </Grid2>
+            ))}
+          </Grid2>
           <Timesheet
             approveEmployeetimesheet={approveEmployeetimesheet}
             disapproveEmployeetimesheet={disapproveEmployeetimesheet}

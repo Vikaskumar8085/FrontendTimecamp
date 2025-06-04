@@ -19,6 +19,7 @@ import {AccessTime, List, Receipt, CheckCircle} from "@mui/icons-material";
 
 import {useDispatch} from "react-redux";
 import StatCard from "../../../../common/StatCard/StatCard";
+import apiInstance from "../../../../ApiInstance/apiInstance";
 
 const ContractorTimesheet = ({
   data,
@@ -64,22 +65,11 @@ const ContractorTimesheet = ({
     );
   };
 
+
+
   return (
     <>
-      <Grid2 container spacing={2} sx={{my: 1}}>
-        <Grid2 size={{md: 3, lg: 3, sm: 12, xs: 12}}>
-          <StatCard />
-        </Grid2>
-        <Grid2 size={{md: 3, lg: 3, sm: 12, xs: 12}}>
-          <StatCard />
-        </Grid2>
-        <Grid2 size={{md: 3, lg: 3, sm: 12, xs: 12}}>
-          <StatCard />
-        </Grid2>
-        <Grid2 size={{md: 3, lg: 3, sm: 12, xs: 12}}>
-          <StatCard />
-        </Grid2>
-      </Grid2>
+   
       {/* <Grid2 container spacing={2} sx={{my: 2}}>
         <Grid2 item sm={12} md={3} lg={3}>
           <Card

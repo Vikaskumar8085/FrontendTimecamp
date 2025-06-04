@@ -17,9 +17,7 @@ import {
   TablePagination,
   Chip,
 } from "@mui/material";
-import Grid from "@mui/material/Grid2";
-import GridViewIcon from "@mui/icons-material/GridView";
-import TableViewIcon from "@mui/icons-material/TableView";
+
 import {Link} from "react-router-dom";
 import HeaderTab from "../../../common/HeaderTab/HeaderTab";
 import Empty from "../../../common/EmptyFolder/Empty";

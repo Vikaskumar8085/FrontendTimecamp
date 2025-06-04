@@ -19,6 +19,9 @@ import {useDispatch} from "react-redux";
 import {setLoader} from "../../../redux/LoaderSlices/LoaderSlices";
 import toast from "react-hot-toast";
 import LayoutDesign from "../../../Layoutcomponents/LayoutDesign/LayoutDesign";
+import apiInstance from "../../../ApiInstance/apiInstance";
+import {Grid2} from "@mui/material";
+import StatCard from "../../../common/StatCard/StatCard";
 
 const ContractorInfo = () => {
   const {id} = useParams();
@@ -138,10 +141,23 @@ const ContractorInfo = () => {
     }
   };
 
+  const [cards, setCards] = useState([]);
+  const fetchcontractorstafcardDatafunc = async () => {
+    try {
+      const response = await apiInstance.get(
+        `/v1/admin/contractor-stat-card/${id}`
+      );
+      setCards(response?.data?.data);
+    } catch (error) {
+      console.log(error?.message);
+    }
+  };
+
   useEffect(() => {
     getcontractorProjectTimesheetfunc();
     getcontractorInfo();
     fetchcontractorprojectfunc();
+    fetchcontractorstafcardDatafunc();
   }, [0]);
 
   const tabsheader = [{title: "Contractor Info"}, {title: "TimeSheet"}];
@@ -159,6 +175,21 @@ const ContractorInfo = () => {
     {
       content: (
         <>
+          <Grid2 container spacing={3} sx={{my: 1}}>
+            {cards.map((card, index) => (
+              <Grid2 key={index} size={{xs: 12, md: 3, lg: 3}}>
+                <StatCard
+                  index={index}
+                  title={card.title}
+                  value={card.value}
+                  unit={card.unit}
+                  percentage={card.percentage}
+                  trendDown={card.trendDown}
+                  chartData={card.chartData}
+                />
+              </Grid2>
+            ))}
+          </Grid2>
           <ContractorTimesheet
             selectedItems={selectedItems}
             setSelectedItems={setSelectedItems}
