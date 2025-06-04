@@ -23,6 +23,7 @@ import CardOne from "../../../common/cardOne/CardOne";
 import TabComp from "../../../common/TabComponent/TabComp";
 import Empty from "../../../common/EmptyFolder/Empty";
 import StatCard from "../../../common/StatCard/StatCard";
+import apiInstance from "../../../ApiInstance/apiInstance";
 
 const Clientinfo = () => {
   const {id} = useParams();
@@ -140,11 +141,24 @@ const Clientinfo = () => {
       toast.error(error?.response?.data?.message);
     }
   };
+  const [cards, setCards] = useState([]);
+  const fetchclientTimesheetstatcardfunc = async () => {
+    try {
+      const response = await apiInstance.get(
+        `/v1/admin/client-stat-card/${id}`
+      );
+      setCards(response?.data?.data);
+      console.log(response, "rersponse");
+    } catch (error) {
+      console.log(error?.message);
+    }
+  };
 
   useEffect(() => {
     getClientInfo();
     getclientTimesheet();
     getclientsprojects();
+    fetchclientTimesheetstatcardfunc();
   }, [0]);
 
   const tabsheader = [
@@ -276,18 +290,19 @@ const Clientinfo = () => {
       content: (
         <>
           <Grid2 container spacing={3} sx={{my: 1}}>
-            <Grid2 size={{md: 3, lg: 3, sm: 6, xs: 12}}>
-              <StatCard />
-            </Grid2>
-            <Grid2 size={{md: 3, lg: 3, sm: 6, xs: 12}}>
-              <StatCard />
-            </Grid2>
-            <Grid2 size={{md: 3, lg: 3, sm: 6, xs: 12}}>
-              <StatCard />
-            </Grid2>
-            <Grid2 size={{md: 3, lg: 3, sm: 6, xs: 12}}>
-              <StatCard />
-            </Grid2>
+            {cards.map((card, index) => (
+              <Grid2 key={index} size={{xs: 12, md: 3, lg: 3}}>
+                <StatCard
+                  index={index}
+                  title={card.title}
+                  value={card.value}
+                  unit={card.unit}
+                  percentage={card.percentage}
+                  trendDown={card.trendDown}
+                  chartData={card.chartData}
+                />
+              </Grid2>
+            ))}
           </Grid2>
           <TimesheetList
             approvecontractortimesheet={approvecontractortimesheet}

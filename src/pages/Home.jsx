@@ -340,6 +340,7 @@ import TableWithFilter from "./Tablewithfilter";
 import TimesheetsFilterModal from "./TimesheetsFilterModal";
 import UserTable from "./UserTable";
 import ProjectCard from "./ProjectCard";
+import UploadTimesheetModal from "./UploadTimesheetModal";
 
 const Home = () => {
   const sampleData = [
@@ -416,6 +417,9 @@ const Home = () => {
       setSelected([...selected, id]);
     }
   };
+
+  const [showModal, setShowModal] = useState(true);
+
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   return (
     <div>
@@ -427,6 +431,12 @@ const Home = () => {
         isOpen={isFilterOpen}
         onClose={() => setIsFilterOpen(false)}
       /> */}
+
+      <div>
+        {showModal && (
+          <UploadTimesheetModal onClose={() => setShowModal(false)} />
+        )}
+      </div>
       <table className="select-table">
         <thead>
           <tr>

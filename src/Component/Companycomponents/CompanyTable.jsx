@@ -55,6 +55,27 @@ function CompanyTable({company, isOpen, setIsOpen, setIsEdit, setIsId}) {
               <Grid2 size={{md: 4, sm: 6, xs: 12, lg: 4}}>
                 <CardOne
                   icon={<EditIcon />}
+                  title="Person Name"
+                  paragraph={company?.Person_Name || "none"}
+                />
+              </Grid2>
+              <Grid2 size={{md: 4, sm: 6, xs: 12, lg: 4}}>
+                <CardOne
+                  icon={<EditIcon />}
+                  title="Person Email"
+                  paragraph={company?.Person_Email || "none"}
+                />
+              </Grid2>
+              <Grid2 size={{md: 4, sm: 6, xs: 12, lg: 4}}>
+                <CardOne
+                  icon={<EditIcon />}
+                  title="Percon Contact Number"
+                  paragraph={company?.Person_Phones || "none"}
+                />
+              </Grid2>
+              <Grid2 size={{md: 4, sm: 6, xs: 12, lg: 4}}>
+                <CardOne
+                  icon={<EditIcon />}
                   title="Address"
                   paragraph={company?.Address}
                 />
@@ -94,6 +115,7 @@ function CompanyTable({company, isOpen, setIsOpen, setIsEdit, setIsId}) {
                   paragraph={company?.Tex_Number || "none"}
                 />
               </Grid2>
+
               <Grid2 size={{md: 4, sm: 6, xs: 12, lg: 4}}>
                 <CardOne
                   icon={<EditIcon />}

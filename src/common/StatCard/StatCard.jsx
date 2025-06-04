@@ -4,6 +4,7 @@ import {Clock} from "lucide-react";
 import "./statcard.scss";
 
 const StatCard = ({
+  index,
   title = "Monthly Sales",
   value = "1200",
   unit = "USD",
@@ -48,7 +49,19 @@ const StatCard = ({
     <div className="stat-card">
       <div className="left">
         <div className="left_wrapper">
-          <div className="icon-wrapper">
+          <div
+            className="icon-wrapper"
+            style={{
+              background:
+                index == 1
+                  ? "red"
+                  : index === 2
+                  ? "blue"
+                  : index === 3
+                  ? "orange"
+                  : null,
+            }}
+          >
             <Clock size={20} color="#fff" />
           </div>
           <h4 className="title">{title}</h4>
