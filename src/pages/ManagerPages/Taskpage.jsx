@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useMemo, useState} from "react";
 import BreadCrumb from "../../common/BreadCrumb/BreadCrumb";
 import AddIcon from "@mui/icons-material/Add";
 import {useFormik} from "formik";
@@ -16,7 +16,6 @@ import {
   Paper,
   CircularProgress,
 } from "@mui/material";
-import * as Yup from "yup";
 import {
   Container,
   Typography,
@@ -59,6 +58,21 @@ const Taskpage = () => {
       console.log(error?.message);
     }
   };
+
+  const selectedProject = useMemo(() => {
+    return Isprojectmilestonedata.find(
+      (project) => project.ProjectId === parseInt(formik.values.ProjectId)
+    );
+  }, [Isprojectmilestonedata, formik.values.ProjectId]);
+
+  const milestones = useMemo(() => {
+    return selectedProject?.mileStonedata || [];
+  }, [selectedProject]);
+
+  const resource = useMemo(() => {
+    return selectedProject?.resourcedata || [];
+  }, [selectedProject]);
+  console.log(Isprojectmilestonedata, "fetchmilestone");
 
   const formik = useFormik({
     initialValues: {
@@ -194,19 +208,16 @@ const Taskpage = () => {
 
                 <Grid size={{md: 6, sm: 12}}>
                   <InputSelect
-                    {...formik.getFieldProps("MilestoneId")}
+                    name="MilestoneId"
+                    labelText="Select MileStone"
+                    placeholder="---please select project Milestone---"
                     value={formik.values.MilestoneId}
-                    labelText="Select Milestone"
-                    placeholder="---Please select milestone ---"
-                    options={Isprojectmilestonedata.filter(
-                      (item) => item.ProjectId === formik.values.ProjectId
-                    ).map((item) => {
-                      return item.mileStonedata?.map((milestoneItem) => ({
-                        label: milestoneItem?.milestoneName,
-                        value: milestoneItem?.milestoneId,
-                      }));
-                    })}
                     onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    options={milestones.map((item) => ({
+                      value: item?.milestoneId,
+                      label: item?.milestoneName,
+                    }))}
                   />
                   {formik.touched.MilestoneId && formik.errors.MilestoneId && (
                     <div style={{color: "red", font: "14px"}}>
@@ -222,14 +233,10 @@ const Taskpage = () => {
                     value={formik.values.Resource_Id}
                     onChange={formik.handleChange}
                     placeholder="--- please select Resource ---"
-                    options={Isprojectmilestonedata.filter(
-                      (item) => item.ProjectId === formik.values.ProjectId
-                    ).map((item) => {
-                      return item.resourcedata?.map((resourcedata) => ({
-                        label: resourcedata.resourceName,
-                        value: resourcedata.resourceId,
-                      }));
-                    })}
+                    options={resource.map((resourcedata) => ({
+                      label: resourcedata.resourceName,
+                      value: resourcedata.resourceId,
+                    }))}
                   />
                 </Grid>
                 <Grid size={{md: 6, sm: 12}}>

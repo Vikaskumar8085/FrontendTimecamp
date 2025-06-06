@@ -13,6 +13,7 @@ import {
   MenuItem,
   Button,
 } from "@mui/material";
+import InputSelect from "../../common/InputSelect/InputSelect";
 
 const ManagerTaskcreationForm = ({Isprojectmilestonedata}) => {
   const formik = useFormik({
@@ -59,20 +60,18 @@ const ManagerTaskcreationForm = ({Isprojectmilestonedata}) => {
           <form onSubmit={formik.handleSubmit}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
-                <FormControl fullWidth>
-                  <InputLabel>Select Project</InputLabel>
-                  <Select
-                    {...formik.getFieldProps("ProjectId")}
-                    value={formik.values.ProjectId}
-                    onChange={formik.handleChange}
-                  >
-                    {Isprojectmilestonedata.map((item) => (
-                      <MenuItem key={item.ProjectId} value={item.ProjectId}>
-                        {item.Project_Name}
-                      </MenuItem>
-                    ))}
-                  </Select>
-                </FormControl>
+                <InputSelect
+                  name="ProjectId"
+                  labelText="Select Project"
+                  placeholder="---please select project---"
+                  value={formik.values.ProjectId}
+                  onChange={formik.handleChange} // Correct: pass the handler
+                  onBlur={formik.handleBlur} // Optional but recommended
+                  options={Isprojectmilestonedata.map((item) => ({
+                    value: item.ProjectId,
+                    label: item.Project_Name,
+                  }))}
+                />
               </Grid>
 
               <Grid item xs={12}>
