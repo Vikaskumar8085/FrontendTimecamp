@@ -15,8 +15,7 @@ import {
   Card,
   Button,
 } from "@mui/material";
-import {AccessTime, List, Receipt, CheckCircle} from "@mui/icons-material";
-import StatCard from "../../../../common/StatCard/StatCard";
+
 const Timesheet = ({
   data,
   approveEmployeetimesheet,

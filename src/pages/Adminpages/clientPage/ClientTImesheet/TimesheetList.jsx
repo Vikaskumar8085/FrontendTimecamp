@@ -13,7 +13,6 @@ import {
   TablePagination,
   Chip,
   Box,
-  FormControl,
   FormControlLabel,
   Checkbox,
   Button,
@@ -21,9 +20,9 @@ import {
 
 const TimesheetList = ({
   data,
-  biiledclienttimesheet,
-  approveclienttimesheet,
-  disapprovedclienttimesheet,
+  biiledclienttimesheetfunc,
+  approveclientTimesheetfunc,
+  disapprovedclienttimesheetfunc,
   setSelectedItems,
   selectedItems,
 }) => {
@@ -49,6 +48,7 @@ const TimesheetList = ({
       <Typography variant="h4" gutterBottom>
         Timesheet Records
       </Typography>
+
       {selectedItems.length > 0 ? (
         <div>
           <Button
@@ -58,7 +58,7 @@ const TimesheetList = ({
               margin: "10px 0px",
               padding: "5px 10px",
             }}
-            onClick={() => approveclienttimesheet(selectedItems)}
+            onClick={() => approveclientTimesheetfunc(selectedItems)}
           >
             Approve
           </Button>
@@ -69,7 +69,7 @@ const TimesheetList = ({
               margin: "10px 10px",
               padding: "5px 10px",
             }}
-            onClick={() => disapprovedclienttimesheet(selectedItems)}
+            onClick={() => disapprovedclienttimesheetfunc(selectedItems)}
           >
             Disapprove
           </Button>
@@ -80,7 +80,7 @@ const TimesheetList = ({
               margin: "10px 10px",
               padding: "5px 10px",
             }}
-            onClick={() => biiledclienttimesheet(selectedItems)}
+            onClick={() => biiledclienttimesheetfunc(selectedItems)}
           >
             Billed
           </Button>

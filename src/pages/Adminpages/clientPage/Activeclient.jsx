@@ -9,13 +9,6 @@ import TableViewIcon from "@mui/icons-material/TableView";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 
 import {
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Paper,
   Card,
   CardContent,
   Typography,

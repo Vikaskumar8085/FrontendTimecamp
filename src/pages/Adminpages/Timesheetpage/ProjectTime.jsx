@@ -22,6 +22,7 @@ import {Link} from "react-router-dom";
 import LayoutDesign from "../../../Layoutcomponents/LayoutDesign/LayoutDesign";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import StatCard from "../../../common/StatCard/StatCard";
+import apiInstance from "../../../ApiInstance/apiInstance";
 
 const ProjectTime = () => {
   const [Isprojecttimedata, setIsprojectTimedata] = useState([]);
@@ -71,30 +72,47 @@ const ProjectTime = () => {
     }
   };
 
+  const [cards, setCards] = useState([]);
+
+  const fetchprojecttimeStatCardFunc = async () => {
+    try {
+      const response = await apiInstance.get(
+        "/v1/admin/project-time-stat-card"
+      );
+      setCards(response?.data?.data);
+    } catch (error) {
+      console.log(error?.message);
+    }
+  };
+
   useEffect(() => {
     getprojecttimefunc();
   }, [search, page, rowsPerPage]);
 
+  useEffect(() => {
+    fetchprojecttimeStatCardFunc();
+  }, [0]);
   return (
     <LayoutDesign>
       <BreadCrumb pageName="Project Time" />
 
-      <Grid2 container spacing={2} sx={{my:2}}>
-        <Grid2 size={{md: 3, lg: 3, sm: 6, xs: 12}}>
-          <StatCard />
-        </Grid2>
-        <Grid2 size={{md: 3, lg: 3, sm: 6, xs: 12}}>
-          <StatCard />
-        </Grid2>
-        <Grid2 size={{md: 3, lg: 3, sm: 6, xs: 12}}>
-          <StatCard />
-        </Grid2>
-        <Grid2 size={{md: 3, lg: 3, sm: 6, xs: 12}}>
-          <StatCard />
-        </Grid2>
+      <Grid2 container spacing={3} sx={{my: 1}}>
+        {cards.map((card, index) => (
+          <Grid2 key={index} size={{xs: 12, md: 3, lg: 3}}>
+            <StatCard
+              index={index}
+              title={card.title}
+              value={card.value}
+              unit={card.unit}
+              percentage={card.percentage}
+              trendDown={card.trendDown}
+              chartData={card.chartData}
+            />
+          </Grid2>
+        ))}
       </Grid2>
 
-      <Grid2 container spacing={2} sx={{my: 2}}>
+      {/* <Grid2 container spacing={2} sx={{my: 2}}>
         <Grid2 item sm={12} md={3} lg={3}>
           <Card
             sx={{
@@ -167,7 +185,7 @@ const ProjectTime = () => {
             </Typography>
           </Card>
         </Grid2>
-      </Grid2>
+      </Grid2> */}
 
       <TextField
         label="Search Projects"

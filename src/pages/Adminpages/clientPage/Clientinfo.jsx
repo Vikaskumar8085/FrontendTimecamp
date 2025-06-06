@@ -70,7 +70,7 @@ const Clientinfo = () => {
     }
   };
 
-  const approvecontractortimesheet = async (value) => {
+  const approveclientTimesheetfunc = async (value) => {
     try {
       dispatch(setLoader(true));
       const val = {
@@ -78,6 +78,7 @@ const Clientinfo = () => {
         payload: value,
       };
       const response = await approvetimesheetbyadminapicall(val);
+      console.log(response, "response");
       dispatch(setLoader(false));
       if (response.success) {
         dispatch(setLoader(false));
@@ -92,7 +93,7 @@ const Clientinfo = () => {
       toast.error(error?.response?.data?.message);
     }
   };
-  const disapprovecontractortimesheet = async (values) => {
+  const disapprovedclienttimesheetfunc = async (values) => {
     try {
       dispatch(setLoader(true));
       const val = {
@@ -100,6 +101,7 @@ const Clientinfo = () => {
         payload: values,
       };
       const response = await disapprovetimesheetbyadminapicall(val);
+      console.log(response, "response");
       if (response?.success) {
         dispatch(setLoader(false));
         toast.success(response?.message);
@@ -116,7 +118,7 @@ const Clientinfo = () => {
     }
   };
 
-  const biiledclienttimesheet = async (values) => {
+  const biiledclienttimesheetfunc = async (values) => {
     try {
       dispatch(setLoader(true));
       const val = {
@@ -305,9 +307,9 @@ const Clientinfo = () => {
             ))}
           </Grid2>
           <TimesheetList
-            approvecontractortimesheet={approvecontractortimesheet}
-            disapprovecontractortimesheet={disapprovecontractortimesheet}
-            biiledclienttimesheet={biiledclienttimesheet}
+            approveclientTimesheetfunc={approveclientTimesheetfunc}
+            disapprovedclienttimesheetfunc={disapprovedclienttimesheetfunc}
+            biiledclienttimesheetfunc={biiledclienttimesheetfunc}
             data={isClientTimesheet}
             setSelectedItems={setSelectedItems}
             selectedItems={selectedItems}

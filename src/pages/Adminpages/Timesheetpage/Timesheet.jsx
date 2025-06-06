@@ -1,16 +1,16 @@
 import React, {useEffect, useState} from "react";
 import BreadCrumb from "../../../common/BreadCrumb/BreadCrumb";
-import {Button, Drawer, Grid, Grid2, Card, Typography} from "@mui/material";
-import moment from "moment";
+import {Button, Drawer, Grid2} from "@mui/material";
+
 import UploadTimesheet from "../../../Component/AdminComponents/Timesheet/UploadTimesheet";
 import {useDispatch, useSelector} from "react-redux";
-import Layout from "../../../Layoutcomponents/Layout/Layout";
+
 import FileUploadIcon from "@mui/icons-material/FileUpload";
 import {setLoader} from "../../../redux/LoaderSlices/LoaderSlices";
 import {fetchtimesheetapicall} from "../../../ApiServices/TimesheetApiServices";
 import toast from "react-hot-toast";
 import {uploadtimesheetcsvapicall} from "../../../ApiServices/Csvapiservices/csvapiservices";
-import VisibilityIcon from "@mui/icons-material/Visibility";
+
 import {
   approvetimesheetbyadminapicall,
   billedtimesheetbyadminapicall,
@@ -23,7 +23,8 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import LayoutDesign from "../../../Layoutcomponents/LayoutDesign/LayoutDesign";
 import Empty from "../../../common/EmptyFolder/Empty";
 import StatCard from "../../../common/StatCard/StatCard";
-import {Link} from "react-router-dom";
+
+import apiInstance from "../../../ApiInstance/apiInstance";
 const Timesheet = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [IsTimesheetdata, setIsTimesheetdata] = useState([]);
@@ -235,24 +236,39 @@ const Timesheet = () => {
     }
   };
   //selected
+
+  const [cards, setCards] = useState([]);
+  const fetchtimesheetstatcardfunc = async () => {
+    try {
+      const response = await apiInstance.get("/v1/admin/timesheet-stat-card");
+      setCards(response?.data?.data);
+    } catch (error) {
+      console.log(error?.response.data?.message);
+    }
+  };
+
+  useEffect(() => {
+    fetchtimesheetstatcardfunc();
+  }, [0]);
   return (
     <LayoutDesign>
       <BreadCrumb pageName="TimeSheet" />
-      <Grid2 container spacing={2} sx={{my: 2}}>
-        <Grid2 size={{md: 3, lg: 3, sm: 6, xs: 12}}>
-          <StatCard />
-        </Grid2>
-        <Grid2 size={{md: 3, lg: 3, sm: 6, xs: 12}}>
-          <StatCard />
-        </Grid2>
-        <Grid2 size={{md: 3, lg: 3, sm: 6, xs: 12}}>
-          <StatCard />
-        </Grid2>
-        <Grid2 size={{md: 3, lg: 3, sm: 6, xs: 12}}>
-          <StatCard />
-        </Grid2>
+      <Grid2 container spacing={3} sx={{my: 1}}>
+        {cards.map((card, index) => (
+          <Grid2 key={index} size={{xs: 12, md: 3, lg: 3}}>
+            <StatCard
+              index={index}
+              title={card.title}
+              value={card.value}
+              unit={card.unit}
+              percentage={card.percentage}
+              trendDown={card.trendDown}
+              chartData={card.chartData}
+            />
+          </Grid2>
+        ))}
       </Grid2>
-      <Grid container spacing={2} sx={{my: 1}}>
+      {/* <Grid container spacing={2} sx={{my: 1}}>
         {stats.map((stat, index) => (
           <Grid item sm={12} md={3} lg={3} key={index}>
             <Card
@@ -273,7 +289,7 @@ const Timesheet = () => {
             </Card>
           </Grid>
         ))}
-      </Grid>
+      </Grid> */}
 
       <div>
         <Button

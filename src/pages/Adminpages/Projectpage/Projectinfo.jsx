@@ -20,8 +20,15 @@ import {
 } from "../../../ApiServices/AdminApiServices/Admin";
 import apiInstance from "../../../ApiInstance/apiInstance";
 import Chart from "react-apexcharts";
-import {Card, CardContent, Typography, CircularProgress} from "@mui/material";
+import {
+  Card,
+  CardContent,
+  Typography,
+  CircularProgress,
+  Grid2,
+} from "@mui/material";
 import LayoutDesign from "../../../Layoutcomponents/LayoutDesign/LayoutDesign";
+import StatCard from "../../../common/StatCard/StatCard";
 
 const Projectinfo = () => {
   const {id} = useParams();
@@ -140,8 +147,24 @@ const Projectinfo = () => {
   };
 
   // approved and disapproved and billed
-  // fetch project info chart
 
+  // fetch project stat card
+
+  const [cards, setCards] = useState([]);
+
+  const fetchprojectstatcardfunc = async () => {
+    try {
+      const response = await apiInstance.get(
+        `/v1/admin/project-stat-card/${id}`
+      );
+      setCards(response?.data?.data);
+    } catch (error) {
+      console.log(error?.response?.data?.message);
+    }
+  };
+
+  // fetch project stat card
+  // fetch project info chart
   const fetchprojectinfochartfunc = async () => {
     try {
       const response = await apiInstance.get(
@@ -185,11 +208,12 @@ const Projectinfo = () => {
     getsingleprojectfunc();
     fetchprojecttimesheetfunc();
     fetchprojectinfochartfunc();
+    fetchprojectstatcardfunc();
   }, [0]);
 
   const tabsheader = [
     {title: "Project Info"},
-    {title: "TimeSheet"},
+    {title: "Project TimeSheet"},
     {title: "Task"},
   ];
   const Tabsbody = [
@@ -219,6 +243,21 @@ const Projectinfo = () => {
     {
       content: (
         <>
+          <Grid2 container spacing={3} sx={{my: 1}}>
+            {cards.map((card, index) => (
+              <Grid2 key={index} size={{xs: 12, md: 3, lg: 3}}>
+                <StatCard
+                  index={index}
+                  title={card.title}
+                  value={card.value}
+                  unit={card.unit}
+                  percentage={card.percentage}
+                  trendDown={card.trendDown}
+                  chartData={card.chartData}
+                />
+              </Grid2>
+            ))}
+          </Grid2>
           <ProjectTimesheet
             approveprojectfunc={approveprojectfunc}
             disapproveprojectfunc={disapproveprojectfunc}

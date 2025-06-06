@@ -1,14 +1,5 @@
 import React, {useEffect} from "react";
-import {
-  TextField,
-  Checkbox,
-  FormControlLabel,
-  Avatar,
-  Container,
-  Typography,
-  FormHelperText,
-  Grid2,
-} from "@mui/material";
+import {Checkbox, FormControlLabel, FormHelperText, Grid2} from "@mui/material";
 import "@fontsource/quicksand";
 import PhoneInput from "react-phone-input-2";
 import * as Yup from "yup";
