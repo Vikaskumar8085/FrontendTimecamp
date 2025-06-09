@@ -59,21 +59,6 @@ const Taskpage = () => {
     }
   };
 
-  const selectedProject = useMemo(() => {
-    return Isprojectmilestonedata.find(
-      (project) => project.ProjectId === parseInt(formik.values.ProjectId)
-    );
-  }, [Isprojectmilestonedata, formik.values.ProjectId]);
-
-  const milestones = useMemo(() => {
-    return selectedProject?.mileStonedata || [];
-  }, [selectedProject]);
-
-  const resource = useMemo(() => {
-    return selectedProject?.resourcedata || [];
-  }, [selectedProject]);
-  console.log(Isprojectmilestonedata, "fetchmilestone");
-
   const formik = useFormik({
     initialValues: {
       ProjectId: "",
@@ -126,6 +111,21 @@ const Taskpage = () => {
       }
     },
   });
+
+  const selectedProject = useMemo(() => {
+    return Isprojectmilestonedata.find(
+      (project) => project.ProjectId === parseInt(formik.values.ProjectId)
+    );
+  }, [Isprojectmilestonedata, formik.values.ProjectId]);
+
+  const milestones = useMemo(() => {
+    return selectedProject?.mileStonedata || [];
+  }, [selectedProject]);
+
+  const resource = useMemo(() => {
+    return selectedProject?.resourcedata || [];
+  }, [selectedProject]);
+  console.log(Isprojectmilestonedata, "fetchmilestone");
 
   const fetchTasks = async () => {
     try {

@@ -82,12 +82,13 @@ const ProjectForm = ({handleSubmit, IsEdit, UpdateHandleProject}) => {
         : "",
       currency: IsEdit?.currency ?? "",
       Project_Hours: IsEdit?.Project_Hours ?? "",
-      bucket: IsEdit?.bucket
-        ? IsEdit.bucket.map((item) => ({
-            bucketHourly: item.bucketHourly || "",
-            bucketHourlyRate: item.bucketHourlyRate || "",
-          }))
-        : [{bucketHourly: "", bucketHourlyRate: ""}],
+      bucket:
+        IsEdit && Array.isArray(IsEdit.bucket)
+          ? IsEdit.bucket.map((item) => ({
+              bucketHourly: item?.bucketHourly ?? "",
+              bucketHourlyRate: item?.bucketHourlyRate ?? "",
+            }))
+          : [{bucketHourly: "", bucketHourlyRate: ""}],
 
       roleProjectMangare:
         Array.isArray(IsEdit?.roleProjectMangare) &&
